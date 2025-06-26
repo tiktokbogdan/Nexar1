@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Filter, Star, Heart, MapPin, Calendar, Gauge, ChevronRight, TrendingUp, Users, Award, Shield, Building, User } from 'lucide-react';
 import { listings } from '../lib/supabase';
-import SupabaseTestButton from '../components/SupabaseTestButton';
 
 const HomePage = () => {
   const [featuredListings, setFeaturedListings] = useState<any[]>([]);
   const [recentListings, setRecentListings] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [showSupabaseTest, setShowSupabaseTest] = useState(false);
 
   useEffect(() => {
     loadListings();
@@ -26,8 +24,7 @@ const HomePage = () => {
       
       if (error) {
         console.error('❌ Error loading listings:', error);
-        setError('Nu s-au putut încărca anunțurile. Conexiunea la Supabase a fost reparată?');
-        setShowSupabaseTest(true);
+        setError('Nu s-au putut încărca anunțurile');
         return;
       }
       
@@ -56,7 +53,6 @@ const HomePage = () => {
         
         setFeaturedListings(featured);
         setRecentListings(recent);
-        setShowSupabaseTest(false);
       } else {
         console.log('ℹ️ No listings found in database');
         setFeaturedListings([]);
@@ -66,7 +62,6 @@ const HomePage = () => {
     } catch (err) {
       console.error('💥 Error in loadListings:', err);
       setError('A apărut o eroare la încărcarea anunțurilor');
-      setShowSupabaseTest(true);
     } finally {
       setIsLoading(false);
     }
@@ -144,19 +139,8 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Test Supabase Section - Show only if there are errors */}
-      {showSupabaseTest && (
-        <section className="py-12 bg-yellow-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-2xl mx-auto">
-              <SupabaseTestButton />
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Error State */}
-      {error && !showSupabaseTest && (
+      {error && (
         <section className="py-12 bg-red-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="bg-red-100 border border-red-200 rounded-xl p-6 max-w-2xl mx-auto">
