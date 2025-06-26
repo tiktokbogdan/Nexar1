@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Filter, Star, Heart, MapPin, Calendar, Gauge, ChevronRight, TrendingUp, Users, Award, Shield, Building, User } from 'lucide-react';
+import { Search, Filter, Star, Heart, MapPin, Calendar, Gauge, ChevronRight, TrendingUp, Users, Award, Shield } from 'lucide-react';
 import { listings } from '../lib/supabase';
 
 const HomePage = () => {
@@ -42,7 +42,6 @@ const HomePage = () => {
           image: listing.images && listing.images.length > 0 ? listing.images[0] : "https://images.pexels.com/photos/2116475/pexels-photo-2116475.jpeg",
           rating: listing.rating || 4.5,
           seller: listing.seller_name,
-          sellerType: listing.seller_type,
           category: listing.category,
           featured: listing.featured || false
         }));
@@ -235,19 +234,12 @@ const HomePage = () => {
                         <span className="text-gray-600">{listing.location}</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        {listing.sellerType === 'dealer' ? (
-                          <Building className="h-4 w-4 text-emerald-500" />
-                        ) : (
-                          <User className="h-4 w-4 text-gray-400" />
-                        )}
                         <span className="text-gray-600">{listing.seller}</span>
                       </div>
                     </div>
                     
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500">
-                        {listing.sellerType === 'dealer' ? 'Dealer Autorizat' : 'Vânzător Privat'}
-                      </span>
+                      <span className="text-sm text-gray-500">Vânzător Verificat</span>
                       <ChevronRight className="h-5 w-5 text-nexar-accent group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
@@ -372,19 +364,12 @@ const HomePage = () => {
                         <span className="text-gray-600">{listing.location}</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        {listing.sellerType === 'dealer' ? (
-                          <Building className="h-4 w-4 text-emerald-500" />
-                        ) : (
-                          <User className="h-4 w-4 text-gray-400" />
-                        )}
                         <span className="text-gray-600">{listing.seller}</span>
                       </div>
                     </div>
                     
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500">
-                        {listing.sellerType === 'dealer' ? 'Dealer Autorizat' : 'Vânzător Privat'}
-                      </span>
+                      <span className="text-sm text-gray-500">Vânzător Verificat</span>
                       <ChevronRight className="h-5 w-5 text-nexar-accent group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
